@@ -4,9 +4,26 @@ import ptBR from "date-fns/locale/pt-BR"
 import { Comment } from "../Comment/Comment"
 import { Avatar } from "../avatar/Avatar"
 import styles from "./Post.module.css"
-import { useState } from "react"
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react"
 
-export function Post({ autor, content, publishedAt }) {
+interface Content {
+    type: 'paragraph' | 'link',
+    content: string
+}
+
+interface Author {
+    name: string;
+    role: string;
+    avatarUrl: string;
+}
+
+interface PostProps {
+    autor: Author;
+    publishedAt: Date;
+    content: Content[];
+}
+
+export function Post({ autor, content, publishedAt }: PostProps) {
 
     const [comments, setComments] = useState([]);
     const [newTextarea, setNewTextarea] = useState('');
@@ -21,26 +38,26 @@ export function Post({ autor, content, publishedAt }) {
         addSuffix: true
     })
 
-    const handleCreateNewComment = () => {
+    const handleCreateNewComment = (event: FormEvent) => {
         event.preventDefault();
-        setComments([...comments, event.target.comment.value])
-        setNewTextarea('');
 
+        setComments([...comments, newTextarea])
+        setNewTextarea('');
     }
 
-    const handleNewTextareaChange = () => {
+    const handleNewTextareaChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         event.target.setCustomValidity('')
         setNewTextarea(event.target.value);
     }
 
-    const deleteComment = (commentDelete) => {
+    const deleteComment = (commentDelete: string) => {
         const commentWithoutDeleteOne = comments.filter(comment => {
             return comment !== commentDelete;
         })
         setComments(commentWithoutDeleteOne);
     }
 
-    const handleNewCommentInvalid = () => {
+    const handleNewCommentInvalid = (event: InvalidEvent<HTMLTextAreaElement>) => {
         event.target.setCustomValidity('Esse campo é obrigatorio !')
     }
 

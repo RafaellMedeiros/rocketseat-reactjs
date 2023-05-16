@@ -1,0 +1,48 @@
+.newTask {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 3.375rem;
+}
+
+.newTask input {
+    background: var(--gray-500);
+    border: 1px solid var(--gray-700);
+    border-radius: 8px;
+
+    width: 39.875rem;
+
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+
+    color: var(--gray-100);
+}
+
+.newTask input:focus {
+    border: 1px solid var(--purple-dark);
+}
+
+.newTask button {
+    width: 5.625rem;
+    height: 100%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin-left: 0.5rem;
+
+    background: var(--blue-dark);
+    border-radius: 8px;
+    border: none;
+
+    font-weight: bold;
+    color: var(--gray-100);
+    font-size: 0.857rem;
+}
+
+.newTask button:hover {
+    background: var(--blue);
+}
